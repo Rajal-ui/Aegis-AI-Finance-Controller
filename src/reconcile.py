@@ -13,6 +13,7 @@ from dataclasses import dataclass
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
 from typing import Any, Protocol
+from urllib import request
 
 from pydantic import ValidationError
 
@@ -95,6 +96,63 @@ class HeuristicLLMResolver:
             bank["bank_transaction_id"] if bank else None,
             0.86 if accepted else 0.62,
             reason,
+        )
+
+
+class OllamaResolver:
+    """Free local LLM via Ollama (OpenAI-compatible endpoint, no API key required).
+
+    Defaults to http://localhost:11434/v1/chat/completions. Set OLLAMA_ENDPOINT,
+    OLLAMA_API_KEY, and OLLAMA_MODEL to override.
+    """
+
+    def __init__(self, config: LLMConfig) -> None:
+        self.config = config
+
+    def resolve(
+        self,
+        order: dict[str, Any],
+        gateway_candidates: list[dict[str, Any]],
+        bank_candidates: list[dict[str, Any]],
+    ) -> LLMDecision:
+        prompt = {
+            "order": order,
+            "gateway_candidates": gateway_candidates,
+            "bank_candidates": bank_candidates,
+            "instruction": "Return JSON with accepted, gateway_id, bank_id, confidence, reason. Accept only if both unique candidates represent the same transaction and amounts exactly agree.",
+        }
+        payload = json.dumps(
+            {
+                "model": self.config.model,
+                "temperature": 0,
+                "messages": [{"role": "user", "content": json.dumps(prompt)}],
+            }
+        ).encode("utf-8")
+        http_request = request.Request(
+            self.config.endpoint or "",
+            data=payload,
+            headers={
+                "Authorization": f"Bearer {self.config.api_key}",
+                "Content-Type": "application/json",
+            },
+        )
+        with request.urlopen(http_request, timeout=60) as response:
+            body = json.loads(response.read().decode("utf-8"))
+        # Ollama returns a non-OpenAI shape by default; handle both.
+        message = body.get("message") or body.get("choices", [{}])[0].get("message", {})
+        content = message.get("content", "")
+        if not content:
+            content = body.get("response", "{}")
+        try:
+            result = json.loads(content)
+        except json.JSONDecodeError:
+            result = {"accepted": False, "reason": "Model returned non-JSON output."}
+        return LLMDecision(
+            accepted=bool(result.get("accepted", False)),
+            gateway_id=result.get("gateway_id"),
+            bank_id=result.get("bank_id"),
+            confidence=float(result.get("confidence", 0)),
+            reason=str(result.get("reason", "No reason returned by model.")),
         )
 
 
