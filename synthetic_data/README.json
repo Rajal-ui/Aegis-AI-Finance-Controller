@@ -1,0 +1,12 @@
+{
+  "seed": 42,
+  "internal_record_count": 100,
+  "gateway_record_count": 100,
+  "bank_record_count": 100,
+  "known_discrepancy_types": [
+    "partial settlements",
+    "delayed settlements",
+    "minor reference formatting errors",
+    "missing source rows represented by orphan replacements"
+  ]
+}

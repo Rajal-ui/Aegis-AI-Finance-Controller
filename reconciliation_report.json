@@ -1,0 +1,933 @@
+{
+  "report_version": "1.0",
+  "summary": {
+    "internal_orders": 100,
+    "gateway_rows": 100,
+    "bank_rows": 100,
+    "successful_matches": 93,
+    "unmatched_exceptions_returned": 7,
+    "unmatched_exceptions_total": 7,
+    "exceptions_truncated": false,
+    "llm_resolutions_attempted": 7,
+    "exception_limit": 20
+  },
+  "matches": [
+    {
+      "transaction_id": "ORD-0001",
+      "gateway_settlement_id": "SET-0001",
+      "bank_transaction_id": "BANK-0001",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 234.52
+    },
+    {
+      "transaction_id": "ORD-0002",
+      "gateway_settlement_id": "SET-0002",
+      "bank_transaction_id": "BANK-0002",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 33.19
+    },
+    {
+      "transaction_id": "ORD-0003",
+      "gateway_settlement_id": "SET-0003",
+      "bank_transaction_id": "BANK-0003",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 105.24
+    },
+    {
+      "transaction_id": "ORD-0004",
+      "gateway_settlement_id": "SET-0004",
+      "bank_transaction_id": "BANK-0004",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 70.72
+    },
+    {
+      "transaction_id": "ORD-0005",
+      "gateway_settlement_id": "SET-0005",
+      "bank_transaction_id": "BANK-0005",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 246.74
+    },
+    {
+      "transaction_id": "ORD-0006",
+      "gateway_settlement_id": "SET-0006",
+      "bank_transaction_id": "BANK-0006",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 53.48
+    },
+    {
+      "transaction_id": "ORD-0007",
+      "gateway_settlement_id": "SET-0007",
+      "bank_transaction_id": "BANK-0007",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 35.41
+    },
+    {
+      "transaction_id": "ORD-0008",
+      "gateway_settlement_id": "SET-0008",
+      "bank_transaction_id": "BANK-0008",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 55.7
+    },
+    {
+      "transaction_id": "ORD-0009",
+      "gateway_settlement_id": "SET-0009",
+      "bank_transaction_id": "BANK-0009",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 101.23
+    },
+    {
+      "transaction_id": "ORD-0010",
+      "gateway_settlement_id": "SET-0010",
+      "bank_transaction_id": "BANK-0010",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 222.26
+    },
+    {
+      "transaction_id": "ORD-0011",
+      "gateway_settlement_id": "SET-0011",
+      "bank_transaction_id": "BANK-0011",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 208.9
+    },
+    {
+      "transaction_id": "ORD-0012",
+      "gateway_settlement_id": "SET-0012",
+      "bank_transaction_id": "BANK-0012",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 237.95
+    },
+    {
+      "transaction_id": "ORD-0014",
+      "gateway_settlement_id": "SET-0014",
+      "bank_transaction_id": "BANK-0014",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 172.19
+    },
+    {
+      "transaction_id": "ORD-0015",
+      "gateway_settlement_id": "SET-0015",
+      "bank_transaction_id": "BANK-0015",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 27.12
+    },
+    {
+      "transaction_id": "ORD-0016",
+      "gateway_settlement_id": "SET-0016",
+      "bank_transaction_id": "BANK-0016",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 163.48
+    },
+    {
+      "transaction_id": "ORD-0017",
+      "gateway_settlement_id": "SET-0017",
+      "bank_transaction_id": "BANK-0017",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 116.05
+    },
+    {
+      "transaction_id": "ORD-0018",
+      "gateway_settlement_id": "SET-0018",
+      "bank_transaction_id": "BANK-0018",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 95.55
+    },
+    {
+      "transaction_id": "ORD-0019",
+      "gateway_settlement_id": "SET-0019",
+      "bank_transaction_id": "BANK-0019",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 58.49
+    },
+    {
+      "transaction_id": "ORD-0020",
+      "gateway_settlement_id": "SET-0020",
+      "bank_transaction_id": "BANK-0020",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 149.49
+    },
+    {
+      "transaction_id": "ORD-0021",
+      "gateway_settlement_id": "SET-0021",
+      "bank_transaction_id": "BANK-0021",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 142.63
+    },
+    {
+      "transaction_id": "ORD-0022",
+      "gateway_settlement_id": "SET-0022",
+      "bank_transaction_id": "BANK-0022",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 222.82
+    },
+    {
+      "transaction_id": "ORD-0023",
+      "gateway_settlement_id": "SET-0023",
+      "bank_transaction_id": "BANK-0023",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 39.23
+    },
+    {
+      "transaction_id": "ORD-0024",
+      "gateway_settlement_id": "SET-0024",
+      "bank_transaction_id": "BANK-0024",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 200.71
+    },
+    {
+      "transaction_id": "ORD-0025",
+      "gateway_settlement_id": "SET-0025",
+      "bank_transaction_id": "BANK-0025",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 149.03
+    },
+    {
+      "transaction_id": "ORD-0026",
+      "gateway_settlement_id": "SET-0026",
+      "bank_transaction_id": "BANK-0026",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 205.89
+    },
+    {
+      "transaction_id": "ORD-0027",
+      "gateway_settlement_id": "SET-0027",
+      "bank_transaction_id": "BANK-0027",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 230.99
+    },
+    {
+      "transaction_id": "ORD-0028",
+      "gateway_settlement_id": "SET-0028",
+      "bank_transaction_id": "BANK-0028",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 214.18
+    },
+    {
+      "transaction_id": "ORD-0029",
+      "gateway_settlement_id": "SET-0029",
+      "bank_transaction_id": "BANK-0029",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 47.79
+    },
+    {
+      "transaction_id": "ORD-0030",
+      "gateway_settlement_id": "SET-0030",
+      "bank_transaction_id": "BANK-0030",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 241.68
+    },
+    {
+      "transaction_id": "ORD-0031",
+      "gateway_settlement_id": "SET-0031",
+      "bank_transaction_id": "BANK-0031",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 119.82
+    },
+    {
+      "transaction_id": "ORD-0032",
+      "gateway_settlement_id": "SET-0032",
+      "bank_transaction_id": "BANK-0032",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 101.28
+    },
+    {
+      "transaction_id": "ORD-0033",
+      "gateway_settlement_id": "SET-0033",
+      "bank_transaction_id": "BANK-0033",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 149.55
+    },
+    {
+      "transaction_id": "ORD-0035",
+      "gateway_settlement_id": "SET-0035",
+      "bank_transaction_id": "BANK-0035",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 78.29
+    },
+    {
+      "transaction_id": "ORD-0036",
+      "gateway_settlement_id": "SET-0036",
+      "bank_transaction_id": "BANK-0036",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 141.41
+    },
+    {
+      "transaction_id": "ORD-0037",
+      "gateway_settlement_id": "SET-0037",
+      "bank_transaction_id": "BANK-0037",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 244.6
+    },
+    {
+      "transaction_id": "ORD-0038",
+      "gateway_settlement_id": "SET-0038",
+      "bank_transaction_id": "BANK-0038",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 248.98
+    },
+    {
+      "transaction_id": "ORD-0039",
+      "gateway_settlement_id": "SET-0039",
+      "bank_transaction_id": "BANK-0039",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 224.6
+    },
+    {
+      "transaction_id": "ORD-0040",
+      "gateway_settlement_id": "SET-0040",
+      "bank_transaction_id": "BANK-0040",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 200.02
+    },
+    {
+      "transaction_id": "ORD-0041",
+      "gateway_settlement_id": "SET-0041",
+      "bank_transaction_id": "BANK-0041",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 78.54
+    },
+    {
+      "transaction_id": "ORD-0042",
+      "gateway_settlement_id": "SET-0042",
+      "bank_transaction_id": "BANK-0042",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 149.33
+    },
+    {
+      "transaction_id": "ORD-0043",
+      "gateway_settlement_id": "SET-0043",
+      "bank_transaction_id": "BANK-0043",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 234.71
+    },
+    {
+      "transaction_id": "ORD-0044",
+      "gateway_settlement_id": "SET-0044",
+      "bank_transaction_id": "BANK-0044",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 249.33
+    },
+    {
+      "transaction_id": "ORD-0045",
+      "gateway_settlement_id": "SET-0045",
+      "bank_transaction_id": "BANK-0045",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 43.32
+    },
+    {
+      "transaction_id": "ORD-0046",
+      "gateway_settlement_id": "SET-0046",
+      "bank_transaction_id": "BANK-0046",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 35.51
+    },
+    {
+      "transaction_id": "ORD-0047",
+      "gateway_settlement_id": "SET-0047",
+      "bank_transaction_id": "BANK-0047",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 156.45
+    },
+    {
+      "transaction_id": "ORD-0048",
+      "gateway_settlement_id": "SET-0048",
+      "bank_transaction_id": "BANK-0048",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 46.68
+    },
+    {
+      "transaction_id": "ORD-0049",
+      "gateway_settlement_id": "SET-0049",
+      "bank_transaction_id": "BANK-0049",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 210.85
+    },
+    {
+      "transaction_id": "ORD-0050",
+      "gateway_settlement_id": "SET-0050",
+      "bank_transaction_id": "BANK-0050",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 94.67
+    },
+    {
+      "transaction_id": "ORD-0051",
+      "gateway_settlement_id": "SET-0051",
+      "bank_transaction_id": "BANK-0051",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 154.64
+    },
+    {
+      "transaction_id": "ORD-0052",
+      "gateway_settlement_id": "SET-0052",
+      "bank_transaction_id": "BANK-0052",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 71.81
+    },
+    {
+      "transaction_id": "ORD-0053",
+      "gateway_settlement_id": "SET-0053",
+      "bank_transaction_id": "BANK-0053",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 70.75
+    },
+    {
+      "transaction_id": "ORD-0054",
+      "gateway_settlement_id": "SET-0054",
+      "bank_transaction_id": "BANK-0054",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 208.94
+    },
+    {
+      "transaction_id": "ORD-0055",
+      "gateway_settlement_id": "SET-0055",
+      "bank_transaction_id": "BANK-0055",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 111.09
+    },
+    {
+      "transaction_id": "ORD-0056",
+      "gateway_settlement_id": "SET-0056",
+      "bank_transaction_id": "BANK-0056",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 216.21
+    },
+    {
+      "transaction_id": "ORD-0057",
+      "gateway_settlement_id": "SET-0057",
+      "bank_transaction_id": "BANK-0057",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 143.61
+    },
+    {
+      "transaction_id": "ORD-0058",
+      "gateway_settlement_id": "SET-0058",
+      "bank_transaction_id": "BANK-0058",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 70.32
+    },
+    {
+      "transaction_id": "ORD-0059",
+      "gateway_settlement_id": "SET-0059",
+      "bank_transaction_id": "BANK-0059",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 186.71
+    },
+    {
+      "transaction_id": "ORD-0060",
+      "gateway_settlement_id": "SET-0060",
+      "bank_transaction_id": "BANK-0060",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 40.43
+    },
+    {
+      "transaction_id": "ORD-0061",
+      "gateway_settlement_id": "SET-0061",
+      "bank_transaction_id": "BANK-0061",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 75.08
+    },
+    {
+      "transaction_id": "ORD-0062",
+      "gateway_settlement_id": "SET-0062",
+      "bank_transaction_id": "BANK-0062",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 247.98
+    },
+    {
+      "transaction_id": "ORD-0063",
+      "gateway_settlement_id": "SET-0063",
+      "bank_transaction_id": "BANK-0063",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 220.43
+    },
+    {
+      "transaction_id": "ORD-0064",
+      "gateway_settlement_id": "SET-0064",
+      "bank_transaction_id": "BANK-0064",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 151.08
+    },
+    {
+      "transaction_id": "ORD-0066",
+      "gateway_settlement_id": "SET-0066",
+      "bank_transaction_id": "BANK-0066",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 198.38
+    },
+    {
+      "transaction_id": "ORD-0067",
+      "gateway_settlement_id": "SET-0067",
+      "bank_transaction_id": "BANK-0067",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 206.28
+    },
+    {
+      "transaction_id": "ORD-0068",
+      "gateway_settlement_id": "SET-0068",
+      "bank_transaction_id": "BANK-0068",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 247.91
+    },
+    {
+      "transaction_id": "ORD-0069",
+      "gateway_settlement_id": "SET-0069",
+      "bank_transaction_id": "BANK-0069",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 248.38
+    },
+    {
+      "transaction_id": "ORD-0070",
+      "gateway_settlement_id": "SET-0070",
+      "bank_transaction_id": "BANK-0070",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 112.43
+    },
+    {
+      "transaction_id": "ORD-0071",
+      "gateway_settlement_id": "SET-0071",
+      "bank_transaction_id": "BANK-0071",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 61.55
+    },
+    {
+      "transaction_id": "ORD-0072",
+      "gateway_settlement_id": "SET-0072",
+      "bank_transaction_id": "BANK-0072",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 167.46
+    },
+    {
+      "transaction_id": "ORD-0073",
+      "gateway_settlement_id": "SET-0073",
+      "bank_transaction_id": "BANK-0073",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 173.67
+    },
+    {
+      "transaction_id": "ORD-0074",
+      "gateway_settlement_id": "SET-0074",
+      "bank_transaction_id": "BANK-0074",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 111.3
+    },
+    {
+      "transaction_id": "ORD-0075",
+      "gateway_settlement_id": "SET-0075",
+      "bank_transaction_id": "BANK-0075",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 83.54
+    },
+    {
+      "transaction_id": "ORD-0076",
+      "gateway_settlement_id": "SET-0076",
+      "bank_transaction_id": "BANK-0076",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 59.86
+    },
+    {
+      "transaction_id": "ORD-0077",
+      "gateway_settlement_id": "SET-0077",
+      "bank_transaction_id": "BANK-0077",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 234.37
+    },
+    {
+      "transaction_id": "ORD-0078",
+      "gateway_settlement_id": "SET-0078",
+      "bank_transaction_id": "BANK-0078",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 224.54
+    },
+    {
+      "transaction_id": "ORD-0079",
+      "gateway_settlement_id": "SET-0079",
+      "bank_transaction_id": "BANK-0079",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 75.08
+    },
+    {
+      "transaction_id": "ORD-0080",
+      "gateway_settlement_id": "SET-0080",
+      "bank_transaction_id": "BANK-0080",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 77.93
+    },
+    {
+      "transaction_id": "ORD-0081",
+      "gateway_settlement_id": "SET-0081",
+      "bank_transaction_id": "BANK-0081",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 198.78
+    },
+    {
+      "transaction_id": "ORD-0082",
+      "gateway_settlement_id": "SET-0082",
+      "bank_transaction_id": "BANK-0082",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 221.26
+    },
+    {
+      "transaction_id": "ORD-0083",
+      "gateway_settlement_id": "SET-0083",
+      "bank_transaction_id": "BANK-0083",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 185.1
+    },
+    {
+      "transaction_id": "ORD-0084",
+      "gateway_settlement_id": "SET-0084",
+      "bank_transaction_id": "BANK-0084",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 61.65
+    },
+    {
+      "transaction_id": "ORD-0085",
+      "gateway_settlement_id": "SET-0085",
+      "bank_transaction_id": "BANK-0085",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 125.76
+    },
+    {
+      "transaction_id": "ORD-0086",
+      "gateway_settlement_id": "SET-0086",
+      "bank_transaction_id": "BANK-0086",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 43.98
+    },
+    {
+      "transaction_id": "ORD-0087",
+      "gateway_settlement_id": "SET-0087",
+      "bank_transaction_id": "BANK-0087",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 210.91
+    },
+    {
+      "transaction_id": "ORD-0089",
+      "gateway_settlement_id": "SET-0089",
+      "bank_transaction_id": "BANK-0089",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 47.67
+    },
+    {
+      "transaction_id": "ORD-0090",
+      "gateway_settlement_id": "SET-0090",
+      "bank_transaction_id": "BANK-0090",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 66.2
+    },
+    {
+      "transaction_id": "ORD-0092",
+      "gateway_settlement_id": "SET-0092",
+      "bank_transaction_id": "BANK-0092",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 205.15
+    },
+    {
+      "transaction_id": "ORD-0093",
+      "gateway_settlement_id": "SET-0093",
+      "bank_transaction_id": "BANK-0093",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 111.85
+    },
+    {
+      "transaction_id": "ORD-0094",
+      "gateway_settlement_id": "SET-0094",
+      "bank_transaction_id": "BANK-0094",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 223.76
+    },
+    {
+      "transaction_id": "ORD-0095",
+      "gateway_settlement_id": "SET-0095",
+      "bank_transaction_id": "BANK-0095",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 94.4
+    },
+    {
+      "transaction_id": "ORD-0098",
+      "gateway_settlement_id": "SET-0098",
+      "bank_transaction_id": "BANK-0098",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 168.55
+    },
+    {
+      "transaction_id": "ORD-0099",
+      "gateway_settlement_id": "SET-0099",
+      "bank_transaction_id": "BANK-0099",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 172.94
+    },
+    {
+      "transaction_id": "ORD-0100",
+      "gateway_settlement_id": "SET-0100",
+      "bank_transaction_id": "BANK-0100",
+      "status": "matched",
+      "method": "deterministic",
+      "confidence": 1.0,
+      "amount": 106.23
+    }
+  ],
+  "unmatched_exceptions": [
+    {
+      "transaction_id": "ORD-0013",
+      "type": "unmatched_exception",
+      "reason": "Gateway amount variance is 0.50; hold for review.",
+      "gateway_candidates": [
+        "SET-0013"
+      ],
+      "bank_candidates": [
+        "BANK-0013"
+      ],
+      "llm_confidence": 0.62
+    },
+    {
+      "transaction_id": "ORD-0034",
+      "type": "unmatched_exception",
+      "reason": "Gateway amount variance is 0.50; hold for review.",
+      "gateway_candidates": [
+        "SET-0034"
+      ],
+      "bank_candidates": [
+        "BANK-0034"
+      ],
+      "llm_confidence": 0.62
+    },
+    {
+      "transaction_id": "ORD-0065",
+      "type": "unmatched_exception",
+      "reason": "Gateway amount variance is 0.50; hold for review.",
+      "gateway_candidates": [
+        "SET-0065"
+      ],
+      "bank_candidates": [
+        "BANK-0065"
+      ],
+      "llm_confidence": 0.62
+    },
+    {
+      "transaction_id": "ORD-0088",
+      "type": "unmatched_exception",
+      "reason": "Gateway amount variance is 0.50; hold for review.",
+      "gateway_candidates": [
+        "SET-0088"
+      ],
+      "bank_candidates": [
+        "BANK-0088"
+      ],
+      "llm_confidence": 0.62
+    },
+    {
+      "transaction_id": "ORD-0091",
+      "type": "unmatched_exception",
+      "reason": "A source row is missing or has no unique candidate.",
+      "gateway_candidates": [
+        "SET-0091"
+      ],
+      "bank_candidates": [],
+      "llm_confidence": 0.62
+    },
+    {
+      "transaction_id": "ORD-0096",
+      "type": "unmatched_exception",
+      "reason": "A source row is missing or has no unique candidate.",
+      "gateway_candidates": [],
+      "bank_candidates": [
+        "BANK-0096"
+      ],
+      "llm_confidence": 0.62
+    },
+    {
+      "transaction_id": "ORD-0097",
+      "type": "unmatched_exception",
+      "reason": "A source row is missing or has no unique candidate.",
+      "gateway_candidates": [
+        "SET-0097"
+      ],
+      "bank_candidates": [],
+      "llm_confidence": 0.62
+    }
+  ]
+}
