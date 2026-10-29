@@ -3,9 +3,12 @@
 from __future__ import annotations
 
 from decimal import Decimal
+from unittest.mock import patch
 
+import json
 import pytest
 
+from src.config import LLMConfig
 from src.models import (
     BankStatementRow,
     InternalOrder,
@@ -19,6 +22,7 @@ from src.reconcile import (
     normalize_reference,
     parse_decimal,
     reconcile,
+    OllamaResolver,
 )
 
 
@@ -166,3 +170,141 @@ def test_model_validation_rejects_bad_order_id() -> None:
             amount="100.00",
             order_reference="ORD-0001",
         )
+
+
+# --- config tests ---
+
+
+def test_config_from_env_heuristic_defaults(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.delenv("OPENAI_COMPATIBLE_ENDPOINT", raising=False)
+    monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+    cfg = LLMConfig.from_env(mode="heuristic")
+    assert cfg.mode == "heuristic"
+    assert cfg.endpoint is None
+    assert cfg.api_key is None
+
+
+def test_config_from_env_ollama_defaults(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.delenv("OLLAMA_ENDPOINT", raising=False)
+    monkeypatch.delenv("OLLAMA_API_KEY", raising=False)
+    monkeypatch.delenv("OLLAMA_MODEL", raising=False)
+    cfg = LLMConfig.from_env(mode="ollama")
+    assert cfg.mode == "ollama"
+    assert cfg.endpoint == "http://localhost:11434/v1/chat/completions"
+    assert cfg.api_key == "ollama"
+    assert cfg.model == "llama3.1:8b"
+
+
+def test_config_from_env_openai_requires_keys(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.delenv("OPENAI_COMPATIBLE_ENDPOINT", raising=False)
+    monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+    with pytest.raises(ValueError, match="requires OPENAI_COMPATIBLE_ENDPOINT"):
+        LLMConfig.from_env(mode="openai")
+
+
+# --- OllamaResolver tests ---
+
+
+def fake_urlopen_openai_shape(payload: bytes, **kwargs: object) -> object:
+    class FakeResponse:
+        def __enter__(self) -> "FakeResponse":
+            return self
+
+        def __exit__(self, *args: object) -> None:
+            return None
+
+        def read(self) -> bytes:
+            return json.dumps(
+                {
+                    "choices": [
+                        {
+                            "message": {
+                                "content": json.dumps(
+                                    {
+                                        "accepted": True,
+                                        "gateway_id": "SET-0001",
+                                        "bank_id": "BANK-0001",
+                                        "confidence": 0.9,
+                                        "reason": "Amounts match.",
+                                    }
+                                )
+                            }
+                        }
+                    ]
+                }
+            ).encode("utf-8")
+
+    return FakeResponse()
+
+
+def fake_urlopen_ollama_shape(payload: bytes, **kwargs: object) -> object:
+    class FakeResponse:
+        def __enter__(self) -> "FakeResponse":
+            return self
+
+        def __exit__(self, *args: object) -> None:
+            return None
+
+        def read(self) -> bytes:
+            return json.dumps(
+                {
+                    "message": {
+                        "content": json.dumps(
+                            {
+                                "accepted": True,
+                                "gateway_id": "SET-0001",
+                                "bank_id": "BANK-0001",
+                                "confidence": 0.88,
+                                "reason": "Amounts match.",
+                            }
+                        )
+                    }
+                }
+            ).encode("utf-8")
+
+    return FakeResponse()
+
+
+def test_ollama_resolver_parses_openai_shape(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("OLLAMA_ENDPOINT", "http://localhost:11434/v1/chat/completions")
+    monkeypatch.setenv("OLLAMA_API_KEY", "ollama")
+    monkeypatch.setenv("OLLAMA_MODEL", "llama3.1:8b")
+    cfg = LLMConfig.from_env(mode="ollama")
+    resolver = OllamaResolver(cfg)
+    order = make_order(1, "100.00")
+    gateway = [make_gateway(1, "100.00")]
+    bank = [make_bank(1, "100.00")]
+    with patch(
+        "urllib.request.urlopen", side_effect=fake_urlopen_openai_shape
+    ):
+        decision = resolver.resolve(
+            order.model_dump(mode="json"),
+            [g.model_dump(mode="json") for g in gateway],
+            [b.model_dump(mode="json") for b in bank],
+        )
+    assert decision.accepted is True
+    assert decision.gateway_id == "SET-0001"
+    assert decision.bank_id == "BANK-0001"
+    assert decision.confidence == 0.9
+
+
+def test_ollama_resolver_parses_ollama_shape(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("OLLAMA_ENDPOINT", "http://localhost:11434/v1/chat/completions")
+    monkeypatch.setenv("OLLAMA_API_KEY", "ollama")
+    monkeypatch.setenv("OLLAMA_MODEL", "llama3.1:8b")
+    cfg = LLMConfig.from_env(mode="ollama")
+    resolver = OllamaResolver(cfg)
+    order = make_order(1, "100.00")
+    gateway = [make_gateway(1, "100.00")]
+    bank = [make_bank(1, "100.00")]
+    with patch(
+        "urllib.request.urlopen", side_effect=fake_urlopen_ollama_shape
+    ):
+        decision = resolver.resolve(
+            order.model_dump(mode="json"),
+            [g.model_dump(mode="json") for g in gateway],
+            [b.model_dump(mode="json") for b in bank],
+        )
+    assert decision.accepted is True
+    assert decision.confidence == 0.88
+    assert decision.reason == "Amounts match."

@@ -3,22 +3,31 @@
 CLI entry point for the AI Finance Controller. The core engine lives in
 ``src.reconcile``; this module wires up argument parsing, source loading,
 resolver selection, and report output.
+
+Supported LLM backends (free options first):
+
+* ``heuristic`` — offline test double, no API key needed (default).
+* ``ollama`` — local Ollama via OpenAI-compatible endpoint, free, no API key
+  required. Set OLLAMA_ENDPOINT / OLLAMA_API_KEY / OLLAMA_MODEL to override.
+* ``openai`` — any OpenAI-compatible endpoint (Groq, Together, OpenRouter, etc.
+  free tiers). Requires OPENAI_COMPATIBLE_ENDPOINT and OPENAI_API_KEY.
 """
 
 from __future__ import annotations
 
 import argparse
 import json
-import os
+import urllib.request
 from pathlib import Path
 from typing import Any
-from urllib import request
 
+from src.config import LLMConfig
 from src.reconcile import (
     DEFAULT_MAX_EXCEPTIONS,
     HeuristicLLMResolver,
     LLMDecision,
     LLMResolver,
+    OllamaResolver,
     load_jsonl,
     reconcile,
     report_to_dict,
@@ -28,10 +37,8 @@ from src.reconcile import (
 class OpenAICompatibleResolver:
     """Minimal HTTP adapter for an OpenAI-compatible JSON chat endpoint."""
 
-    def __init__(self, endpoint: str, api_key: str, model: str) -> None:
-        self.endpoint = endpoint
-        self.api_key = api_key
-        self.model = model
+    def __init__(self, config: LLMConfig) -> None:
+        self.config = config
 
     def resolve(
         self,
@@ -47,21 +54,21 @@ class OpenAICompatibleResolver:
         }
         payload = json.dumps(
             {
-                "model": self.model,
+                "model": self.config.model,
                 "temperature": 0,
                 "response_format": {"type": "json_object"},
                 "messages": [{"role": "user", "content": json.dumps(prompt)}],
             }
         ).encode("utf-8")
-        http_request = request.Request(
-            self.endpoint,
+        http_request = urllib.request.Request(
+            self.config.endpoint or "",
             data=payload,
             headers={
-                "Authorization": f"Bearer {self.api_key}",
+                "Authorization": f"Bearer {self.config.api_key}",
                 "Content-Type": "application/json",
             },
         )
-        with request.urlopen(http_request, timeout=30) as response:
+        with urllib.request.urlopen(http_request, timeout=30) as response:
             body = json.loads(response.read().decode("utf-8"))
         content = body["choices"][0]["message"]["content"]
         result = json.loads(content)
@@ -79,8 +86,9 @@ def build_parser() -> argparse.ArgumentParser:
         description=__doc__,
         epilog=(
             "Default resolver is an offline heuristic test double. "
-            "Use --llm-mode openai with OPENAI_COMPATIBLE_ENDPOINT and "
-            "OPENAI_API_KEY for a real model."
+            "Use --llm-mode ollama for a free local model, or --llm-mode openai "
+            "with OPENAI_COMPATIBLE_ENDPOINT and OPENAI_API_KEY for a free-tier "
+            "provider such as Groq, Together AI, or OpenRouter."
         ),
     )
     parser.add_argument(
@@ -103,11 +111,21 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--llm-mode",
-        choices=("heuristic", "openai"),
+        choices=("heuristic", "ollama", "openai"),
         default="heuristic",
-        help="Resolver backend: offline heuristic or OpenAI-compatible endpoint.",
+        help="Resolver backend: heuristic (offline), ollama (free local), or "
+        "openai (OpenAI-compatible free-tier endpoint).",
     )
     return parser
+
+
+def build_resolver(args: argparse.Namespace) -> LLMResolver:
+    config = LLMConfig.from_env(mode=args.llm_mode)
+    if args.llm_mode == "ollama":
+        return OllamaResolver(config)
+    if args.llm_mode == "openai":
+        return OpenAICompatibleResolver(config)
+    return HeuristicLLMResolver()
 
 
 def main() -> None:
@@ -120,18 +138,7 @@ def main() -> None:
         "bank_statement": load_jsonl(args.input_dir / "bank_statement.jsonl"),
     }
 
-    if args.llm_mode == "openai":
-        endpoint = os.environ.get("OPENAI_COMPATIBLE_ENDPOINT")
-        api_key = os.environ.get("OPENAI_API_KEY")
-        model = os.environ.get("OPENAI_MODEL", "gpt-4o-mini")
-        if not endpoint or not api_key:
-            raise SystemExit(
-                "openai mode requires OPENAI_COMPATIBLE_ENDPOINT and OPENAI_API_KEY"
-            )
-        resolver: LLMResolver = OpenAICompatibleResolver(endpoint, api_key, model)
-    else:
-        resolver = HeuristicLLMResolver()
-
+    resolver = build_resolver(args)
     report = reconcile(sources, resolver, max_exceptions=args.max_exceptions)
     args.output.write_text(
         json.dumps(report_to_dict(report), indent=2) + "\n", encoding="utf-8"
